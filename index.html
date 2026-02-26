@@ -23,40 +23,37 @@
       background-color: var(--bg-dark);
       scroll-behavior: smooth;
       margin: 0;
+      padding: 0;
       overflow-x: hidden;
       color: white;
     }
 
-    .body {
-    background-image: url('jac3.jpeg');
-    background-size: cover;
-    background-position: center; /* Keeps your chosen center point */
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
+    /* THE IMAGE POSITION: FIXED ON ALL DEVICES */
+    .hero-bg-left {
+      position: fixed;
+      top: 0; 
+      left: 0; 
+      width: 50%; 
+      height: 100vh;
+      background: linear-gradient(to right, rgba(11, 11, 11, 0), var(--bg-dark)), url('jac3.jpeg');
+      background-size: cover; 
+      background-position: center 20%; 
+      z-index: -1;
+    }
 
-/* Specific fix for mobile devices */
-@media (max-width: 768px) {
-    body {
-        /* On mobile, 'fixed' often breaks. 'scroll' ensures it actually renders */
-        background-attachment: scroll; 
-        /* Ensures the height covers the whole mobile screen even when scrolling */
-        background-size: cover; 
+    /* MOBILE ADJUSTMENTS */
+    @media (max-width: 768px) {
+      .hero-bg-left {
+        width: 45%; /* Keep the image visible on nearly half the screen */
+      }
+      nav ul {
+        display: flex !important; 
+        font-size: 0.75rem;
+        gap: 12px !important;
+      }
+      nav h1 { font-size: 1rem !important; }
+      header { min-height: 100vh; }
     }
-    
-    /* Fix for the Top Navigation Visibility */
-    nav {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    
-    nav .flex.space-x-8 {
-        display: flex !important;
-        gap: 15px; /* Gives them room to show up without overlapping */
-        margin-left: 0;
-    }
-}
-    @media (min-width: 768px) { .hero-bg-left { display: block; } }
 
     .content-wrapper { position: relative; z-index: 10; background: transparent; }
 
@@ -67,7 +64,6 @@
     }
     .btn-primary:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(252, 166, 31, 0.3); }
 
-    /* FIXED CARD HOVER */
     .glass-card {
       border: 1px solid rgba(255, 255, 255, 0.1);
       background-color: rgba(255, 255, 255, 0.05);
@@ -94,7 +90,6 @@
       z-index: 1000; transition: 0.3s;
     }
 
-    /* FIXED BACK TO TOP */
     #backToTop {
       position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
       background-color: var(--primary-color); color: black; border-radius: 50%;
@@ -130,20 +125,19 @@
     
     <a href="https://wa.me/260779495904" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
-    <nav class="flex items-center justify-between px-8 md:px-[10%] py-6 sticky top-0 bg-black/40 backdrop-blur-lg z-50">
-      <h1 class="text-2xl font-bold tracking-widest uppercase">Jackson nsonga<span class="text-[#fca61f]">.</span></h1>
-      <ul class="hidden md:flex space-x-10 font-medium">
+    <nav class="flex items-center justify-between px-4 md:px-[10%] py-6 sticky top-0 bg-black/60 backdrop-blur-lg z-50">
+      <h1 class="text-xl md:text-2xl font-bold tracking-widest uppercase">Jackson nsonga<span class="text-[#fca61f]">.</span></h1>
+      <ul class="flex space-x-3 md:space-x-10 font-medium">
         <li><a href="#home" class="hover:text-[#fca61f] transition">Home</a></li>
         <li><a href="#about" class="hover:text-[#fca61f] transition">About</a></li>
-        <li><a href="#services" class="hover:text-[#fca61f] transition">Services</a></li> 
         <li><a href="#projects" class="hover:text-[#fca61f] transition">Work</a></li>
         <li><a href="#contact" class="hover:text-[#fca61f] transition">Contact</a></li>
       </ul>
       <a href="#contact" class="hidden md:block border border-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition">Connect</a>
     </nav>
 
-    <header id="home" class="flex min-height-100vh w-full md:flex-row flex-col min-h-screen">
-      <div class="flex-1 md:block hidden"></div>
+    <header id="home" class="flex min-h-screen w-full md:flex-row flex-col">
+      <div class="w-1/2 md:block hidden"></div>
       <div class="flex-1 px-[5%] flex flex-col justify-center text-left py-20">
         <img src="jac.jpg" alt="Jackson Nsonga" class="w-[150px] h-[150px] rounded-full border-4 border-white shadow-[0_0_30px_rgba(252,166,31,0.4)] object-cover mb-8" data-sr-top>
         <h3 class="text-xl md:text-2xl mb-4 font-light" data-sr>Hi! I'm Jackson Nsonga</h3>
@@ -230,40 +224,33 @@
       </div>
     </section>
 
-   <section id="projects" class="py-24 px-8 md:px-[10%]">
-  <h4 class="text-center text-[#fca61f] text-lg mb-2">My portfolio</h4>
-  <h2 class="text-center text-4xl font-bold mb-16">Latest work</h2>
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-    
-    <div class="group relative overflow-hidden rounded-xl h-96 glass-card bg-cover bg-center" style="background-image: url('loan system.png');" data-sr>
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent transition-opacity duration-500 group-hover:via-black/80"></div>
-      <div class="absolute bottom-8 left-6 right-6 text-left transform transition-all duration-500 group-hover:-translate-y-2">
-        <h3 class="text-2xl font-bold mb-2 text-[#fca61f]">Loan System</h3>
-        <p class="text-sm text-gray-200 mb-4 opacity-90">Full-stack MERN application for financial management.</p>
-        <a href="https://github.com/JACKSON-THE-IT-GUY" target="_blank" class="inline-block text-xs border border-white/50 px-4 py-2 rounded-full hover:bg-[#fca61f] hover:text-black hover:border-[#fca61f] transition">Code</a>
-      </div>
-    </div>
-
-    <div class="group relative overflow-hidden rounded-xl h-96 glass-card bg-cover bg-center" style="background-image: url('auth engine.png');" data-sr>
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent transition-opacity duration-500 group-hover:via-black/80"></div>
-      <div class="absolute bottom-8 left-6 right-6 text-left transform transition-all duration-500 group-hover:-translate-y-2">
-        <h3 class="text-2xl font-bold mb-2 text-[#fca61f]">Auth Engine</h3>
-        <p class="text-sm text-gray-200 mb-4 opacity-90">JWT & Encrypted session management for secure apps.</p>
-        <a href="https://github.com/JACKSON-THE-IT-GUY" target="_blank" class="inline-block text-xs border border-white/50 px-4 py-2 rounded-full hover:bg-[#fca61f] hover:text-black hover:border-[#fca61f] transition">GitHub</a>
-      </div>
-    </div>
-
-    <div class="group relative overflow-hidden rounded-xl h-96 glass-card bg-cover bg-center" style="background-image: url('frontend.png');" data-sr>
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent transition-opacity duration-500 group-hover:via-black/80"></div>
-      <div class="absolute bottom-8 left-6 right-6 text-left transform transition-all duration-500 group-hover:-translate-y-2">
-        <h3 class="text-2xl font-bold mb-2 text-[#fca61f]">Frontend UI</h3>
-        <p class="text-sm text-gray-200 mb-4 opacity-90">Reusable React & Tailwind components with dark mode support.</p>
-        <a href="https://github.com/JACKSON-THE-IT-GUY" target="_blank" class="inline-block text-xs border border-white/50 px-4 py-2 rounded-full hover:bg-[#fca61f] hover:text-black hover:border-[#fca61f] transition">Preview</a>
-      </div>
-    </div>
-
-  </div>
-</section>
+    <section id="projects" class="py-24 px-8 md:px-[10%]">
+      <h4 class="text-center text-[#fca61f] text-lg mb-2">My portfolio</h4>
+      <h2 class="text-center text-4xl font-bold mb-16">Latest work</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="group relative overflow-hidden rounded-xl h-96 glass-card bg-cover bg-center" style="background-image: url('loan%20system.png');" data-sr>
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent transition-opacity duration-500 group-hover:via-black/80"></div>
+          <div class="absolute bottom-8 left-6 right-6 text-left transform transition-all duration-500 group-hover:-translate-y-2">
+            <h3 class="text-2xl font-bold mb-2 text-[#fca61f]">Loan System</h3>
+            <p class="text-sm text-gray-200 mb-4 opacity-90">Full-stack MERN application for financial management.</p>
+            <a href="https://github.com/JACKSON-THE-IT-GUY" target="_blank" class="inline-block text-xs border border-white/50 px-4 py-2 rounded-full hover:bg-[#fca61f] hover:text-black transition">Code</a>
+          </div>
+        </div>
+        <div class="group relative overflow-hidden rounded-xl h-96 glass-card bg-cover bg-center" style="background-image: url('auth%20engine.png');" data-sr>
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent transition-opacity duration-500 group-hover:via-black/80"></div>
+          <div class="absolute bottom-8 left-6 right-6 text-left transform transition-all duration-500 group-hover:-translate-y-2">
+            <h3 class="text-2xl font-bold mb-2 text-[#fca61f]">Auth Engine</h3>
+            <p class="text-sm text-gray-200 mb-4 opacity-90">JWT & Encrypted session management.</p>
+            <a href="https://github.com/JACKSON-THE-IT-GUY" target="_blank" class="inline-block text-xs border border-white/50 px-4 py-2 rounded-full hover:bg-[#fca61f] hover:text-black transition">GitHub</a>
+          </div>
+        </div>
+        <div class="group relative overflow-hidden rounded-xl h-96 glass-card bg-cover bg-center" style="background-image: url('frontend.png');" data-sr>
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent transition-opacity duration-500 group-hover:via-black/80"></div>
+          <div class="absolute bottom-8 left-6 right-6 text-left transform transition-all duration-500 group-hover:-translate-y-2">
+            <h3 class="text-2xl font-bold mb-2 text-[#fca61f]">Frontend UI</h3>
+            <p class="text-sm text-gray-200 mb-4 opacity-90">Modern React components.</p>
+            <a href="https://github.com/JACKSON-THE-IT-GUY" target="_blank" class="inline-block text-xs border border-white/50 px-4 py-2 rounded-full hover:bg-[#fca61f] hover:text-black transition">Preview</a>
+          </div>
         </div>
       </div>
     </section>
@@ -287,16 +274,6 @@
         </form>
       </div>
     </section>
-
-    <div class="overflow-hidden whitespace-nowrap py-10 bg-black/40 border-y border-white/5 mt-10">
-      <div class="inline-flex gap-16 animate-marquee">
-        <div class="flex items-center gap-3 text-xl font-bold text-gray-500 hover:text-white transition-colors cursor-default"><i class="fa-brands fa-react text-[#fca61f] text-3xl"></i> React.js</div>
-        <div class="flex items-center gap-3 text-xl font-bold text-gray-500 hover:text-white transition-colors cursor-default"><i class="fa-brands fa-node-js text-[#fca61f] text-3xl"></i> Node.js</div>
-        <div class="flex items-center gap-3 text-xl font-bold text-gray-500 hover:text-white transition-colors cursor-default"><i class="fa-solid fa-database text-[#fca61f] text-3xl"></i> MongoDB</div>
-        <div class="flex items-center gap-3 text-xl font-bold text-gray-500 hover:text-white transition-colors cursor-default"><i class="fa-brands fa-js text-[#fca61f] text-3xl"></i> JavaScript</div>
-        <div class="flex items-center gap-3 text-xl font-bold text-gray-500 hover:text-white transition-colors cursor-default"><i class="fa-brands fa-envira text-[#fca61f] text-3xl"></i> Express.js</div>
-      </div>
-    </div>
 
     <footer class="py-16 border-t border-white/5 text-center">
       <div class="mb-8 flex justify-center gap-6">
@@ -333,7 +310,6 @@
       btnText.innerText = content.classList.contains('open') ? 'Close Resume' : 'View my Resume';
     }
 
-    // ARROW VISIBILITY LOGIC
     const backToTopBtn = document.getElementById("backToTop");
     window.onscroll = function() {
       if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
