@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jackson Nsonga | Portfolio</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+    
+    :root {
+      --primary-color: #fca61f;
+      --bg-dark: #0b0b0b;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-dark);
+      scroll-behavior: smooth;
+      margin: 0;
+      overflow-x: hidden;
+      color: white;
+    }
+
+    .hero-bg-left {
+      position: fixed;
+      top: 0; left: 0; width: 50%; height: 100vh;
+      background: linear-gradient(to right, rgba(11, 11, 11, 0), var(--bg-dark)), url('jac3.jpeg');
+      background-size: cover; background-position: center 20%; 
+      z-index: -1; display: none;
+    }
+    @media (min-width: 768px) { .hero-bg-left { display: block; } }
+
+    .content-wrapper { position: relative; z-index: 10; background: transparent; }
+
+    .btn-primary {
+      background: linear-gradient(to right, #fca61f, #ff8c00);
+      padding: 12px 35px; border-radius: 30px; font-weight: 600;
+      transition: 0.4s; display: inline-block; color: black; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(252, 166, 31, 0.3); }
+
+    /* FIXED CARD HOVER */
+    .glass-card {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px); 
+      transition: all 0.4s ease;
+    }
+    .glass-card:hover { 
+      border-color: var(--primary-color); 
+      background-color: rgba(252, 166, 31, 0.1); 
+      transform: translateY(-10px);
+    }
+
+    .contact-input {
+      width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px;
+      color: white; outline: none; transition: 0.3s; margin-bottom: 20px;
+    }
+
+    .whatsapp-float {
+      position: fixed; bottom: 30px; left: 30px;
+      width: 55px; height: 55px; background-color: #25d366;
+      color: #fff; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; font-size: 30px;
+      z-index: 1000; transition: 0.3s;
+    }
+
+    /* FIXED BACK TO TOP */
+    #backToTop {
+      position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+      background-color: var(--primary-color); color: black; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 2000; opacity: 0; visibility: hidden; transition: 0.4s;
+    }
+    #backToTop.show { opacity: 1 !important; visibility: visible !important; }
+
+    #aboutParagraph, #resumeContent {
+      max-height: 0; opacity: 0; overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #aboutParagraph.open { max-height: 500px; opacity: 1; margin-top: 1.5rem; }
+    #resumeContent.open { max-height: 1200px; opacity: 1; padding-top: 2rem; padding-bottom: 3rem; }
+
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .animate-marquee {
+      animation: marquee 25s linear infinite;
+    }
+
+    section { background: transparent !important; }
+  </style>
+</head>
+<body>
+
+  <div class="hero-bg-left"></div>
+
+  <div class="content-wrapper">
+    <div id="backToTop" onclick="scrollToTop()"><i class="fa-solid fa-arrow-up"></i></div>
+    
+    <a href="https://wa.me/260779495904" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
+    <nav class="flex items-center justify-between px-8 md:px-[10%] py-6 sticky top-0 bg-black/40 backdrop-blur-lg z-50">
+      <h1 class="text-2xl font-bold tracking-widest uppercase">Jackson nsonga<span class="text-[#fca61f]">.</span></h1>
+      <ul class="hidden md:flex space-x-10 font-medium">
+        <li><a href="#home" class="hover:text-[#fca61f] transition">Home</a></li>
+        <li><a href="#about" class="hover:text-[#fca61f] transition">About</a></li>
+        <li><a href="#services" class="hover:text-[#fca61f] transition">Services</a></li> 
+        <li><a href="#projects" class="hover:text-[#fca61f] transition">Work</a></li>
+        <li><a href="#contact" class="hover:text-[#fca61f] transition">Contact</a></li>
+      </ul>
+      <a href="#contact" class="hidden md:block border border-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition">Connect</a>
+    </nav>
+
+    <header id="home" class="flex min-height-100vh w-full md:flex-row flex-col min-h-screen">
+      <div class="flex-1 md:block hidden"></div>
+      <div class="flex-1 px-[5%] flex flex-col justify-center text-left py-20">
+        <img src="jac.jpg" alt="Jackson Nsonga" class="w-[150px] h-[150px] rounded-full border-4 border-white shadow-[0_0_30px_rgba(252,166,31,0.4)] object-cover mb-8" data-sr-top>
+        <h3 class="text-xl md:text-2xl mb-4 font-light" data-sr>Hi! I'm Jackson Nsonga</h3>
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight" data-sr>
+          I am a <span id="typing" class="text-[#fca61f]"></span>
+        </h1>
+        <p class="max-w-xl text-gray-400 mb-10 text-lg" data-sr>
+          Computer Science student at CBU, building high-performance web applications and backend systems.
+        </p>
+        <div class="flex flex-col md:flex-row gap-5" data-sr>
+          <a href="#contact" class="btn-primary text-center">Connect with me</a>
+          <button onclick="toggleResume()" id="resumeBtn" class="border border-white/30 px-8 py-3 rounded-full flex items-center justify-center gap-2 hover:bg-white/10 transition">
+            <i class="fa-solid fa-file-invoice"></i> <span id="resumeBtnText">View my Resume</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="resumeContent" class="px-8 md:px-[10%] flex justify-end">
+      <div class="glass-card p-8 md:p-12 rounded-3xl max-w-2xl border border-[#fca61f]/40 w-full shadow-2xl">
+        <div class="grid md:grid-cols-2 gap-8 text-left">
+          <div>
+            <h3 class="text-xl font-bold mb-4 text-[#fca61f]">Education</h3>
+            <p class="text-white font-semibold">BSc in Computer Science</p>
+            <p class="text-gray-400 text-sm mb-6">Copperbelt University (CBU) | 2024 - Present</p>
+            <h3 class="text-xl font-bold mb-4 text-[#fca61f]">Top Skills</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-white/10 px-3 py-1 rounded-full border border-white/10">MongoDB</span>
+              <span class="text-xs bg-white/10 px-3 py-1 rounded-full border border-white/10">Express.js</span>
+              <span class="text-xs bg-white/10 px-3 py-1 rounded-full border border-white/10">React.js</span>
+              <span class="text-xs bg-white/10 px-3 py-1 rounded-full border border-white/10">Node.js</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4 text-[#fca61f]">Professional Profile</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">Full-stack developer specializing in the MERN stack. I design secure, scalable applications with a focus on modern user experiences.</p>
+            <a href="Resume.pdf" download class="btn-primary flex items-center justify-center gap-2 w-full">
+              <i class="fa-solid fa-download"></i> Download PDF
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="about" class="py-24 px-8 md:px-[10%]">
+      <h4 class="text-center text-[#fca61f] text-lg mb-2">Introduction</h4>
+      <h2 class="text-center text-4xl font-bold mb-16">About me</h2>
+      <div class="grid md:grid-cols-3 gap-8 mb-12">
+        <div class="glass-card p-10 rounded-2xl text-center" data-sr>
+          <i class="fa-solid fa-graduation-cap text-4xl text-[#fca61f] mb-6"></i>
+          <h3 class="text-xl font-bold mb-3">Education</h3>
+          <p class="text-gray-400 text-sm">BSc in Computer Science<br>CBU</p>
+        </div>
+        <div class="glass-card p-10 rounded-2xl text-center" data-sr>
+          <i class="fa-solid fa-code text-4xl text-[#fca61f] mb-6"></i>
+          <h3 class="text-xl font-bold mb-3">Tech Stack</h3>
+          <p class="text-gray-400 text-sm">MERN Stack Developer</p>
+        </div>
+        <div class="glass-card p-10 rounded-2xl text-center" data-sr>
+          <i class="fa-solid fa-briefcase text-4xl text-[#fca61f] mb-6"></i>
+          <h3 class="text-xl font-bold mb-3">Projects</h3>
+          <p class="text-gray-400 text-sm">10+ Full-Stack Apps</p>
+        </div>
+      </div>
+      <div class="max-w-3xl mx-auto text-center" data-sr>
+        <button onclick="toggleAbout()" id="aboutBtn" class="glass-card px-8 py-4 rounded-xl border border-white/20 hover:border-[#fca61f] transition-all duration-500 w-full md:w-auto group">
+          <span class="text-gray-300 group-hover:text-white transition">Click to read my story</span>
+          <div id="aboutParagraph">
+            <p class="text-gray-400 leading-relaxed pt-6 border-t border-white/10 mt-4 text-left">
+              I am a dedicated Computer Science student at the Copperbelt University. My journey in tech is driven by solving real-world problems through clean, efficient code. I specialize in the MERN stack and have delivered systems ranging from secure authentication to complex management portals.
+            </p>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <section id="services" class="py-24 px-8 md:px-[10%]">
+      <h4 class="text-center text-[#fca61f] text-lg mb-2">What I offer</h4>
+      <h2 class="text-center text-4xl font-bold mb-16">My Services</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass-card p-10 rounded-2xl" data-sr><i class="fa-solid fa-laptop-code text-3xl text-[#fca61f] mb-6"></i><h3 class="text-2xl font-bold mb-4">Web Dev</h3><p class="text-gray-400">Building responsive, high-performance web applications.</p></div>
+        <div class="glass-card p-10 rounded-2xl" data-sr><i class="fa-solid fa-server text-3xl text-[#fca61f] mb-6"></i><h3 class="text-2xl font-bold mb-4">Backend API</h3><p class="text-gray-400">Designing secure RESTful APIs with Node.js and Express.</p></div>
+        <div class="glass-card p-10 rounded-2xl" data-sr><i class="fa-solid fa-mobile-screen text-3xl text-[#fca61f] mb-6"></i><h3 class="text-2xl font-bold mb-4">UI/UX Design</h3><p class="text-gray-400">Creating modern interfaces with Tailwind CSS and React.</p></div>
+      </div>
+    </section>
+
+   <section id="projects" class="py-24 px-8 md:px-[10%]">
+  <h4 class="text-center text-[#fca61f] text-lg mb-2">My portfolio</h4>
+  <h2 class="text-center text-4xl font-bold mb-16">Latest work</h2>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    
+    <div class="group relative overflow-hidden rounded-xl h-96 glass-card bg-cover bg-center" style="background-image: url('loan system.png');" data-sr>
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent transition-opacity duration-500 group-hover:via-black/80"></div>
+      <div class="absolute bottom-8 left-6 right-6 text-left transform transition-all duration-500 group-hover:-translate-y-2">
+        <h3 class="text-2xl font-bold mb-2 text-[#fca61f]">Loan System</h3>
+        <p class="text-sm text-gray-200 mb-4 opacity-90">Full-stack MERN application for financial management.</p>
+        <a href="https://github.com/JACKSON-THE-IT-GUY" target="_blank" class="inline-block text-xs border border-white/50 px-4 py-2 rounded-full hover:bg-[#fca61f] hover:text-black hover:border-[#fca61f] transition">Code</a>
+      </div>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-xl h-96 glass-card bg-cover bg-center" style="background-image: url('auth\ engine.png');" data-sr>
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent transition-opacity duration-500 group-hover:via-black/80"></div>
+      <div class="absolute bottom-8 left-6 right-6 text-left transform transition-all duration-500 group-hover:-translate-y-2">
+        <h3 class="text-2xl font-bold mb-2 text-[#fca61f]">Auth Engine</h3>
+        <p class="text-sm text-gray-200 mb-4 opacity-90">JWT & Encrypted session management for secure apps.</p>
+        <a href="https://github.com/JACKSON-THE-IT-GUY" target="_blank" class="inline-block text-xs border border-white/50 px-4 py-2 rounded-full hover:bg-[#fca61f] hover:text-black hover:border-[#fca61f] transition">GitHub</a>
+      </div>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-xl h-96 glass-card bg-cover bg-center" style="background-image: url('frontend.png');" data-sr>
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent transition-opacity duration-500 group-hover:via-black/80"></div>
+      <div class="absolute bottom-8 left-6 right-6 text-left transform transition-all duration-500 group-hover:-translate-y-2">
+        <h3 class="text-2xl font-bold mb-2 text-[#fca61f]">Frontend UI</h3>
+        <p class="text-sm text-gray-200 mb-4 opacity-90">Reusable React & Tailwind components with dark mode support.</p>
+        <a href="https://github.com/JACKSON-THE-IT-GUY" target="_blank" class="inline-block text-xs border border-white/50 px-4 py-2 rounded-full hover:bg-[#fca61f] hover:text-black hover:border-[#fca61f] transition">Preview</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-24 px-8 md:px-[10%]">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-20 text-left">
+        <div class="flex-1 space-y-8" data-sr>
+          <h3 class="text-4xl font-bold text-[#fca61f]">Let's talk</h3>
+          <p class="text-gray-400 text-lg">Available for projects and collaborations.</p>
+          <div class="space-y-6">
+            <div class="flex items-center gap-5 text-gray-300"><i class="fa-solid fa-envelope text-[#fca61f] text-xl"></i><span>jacksonnsongadevlog@gmail.com</span></div>
+            <div class="flex items-center gap-5 text-gray-300"><i class="fa-solid fa-location-dot text-[#fca61f] text-xl"></i><span>Lusaka, Zambia</span></div>
+          </div>
+        </div>
+        <form action="https://api.web3forms.com/submit" method="POST" class="flex-1" data-sr>
+          <input type="hidden" name="access_key" value="6d473679-ed56-4958-980a-fdafcea37061">
+          <input type="text" name="name" placeholder="Your Name" class="contact-input" required>
+          <input type="email" name="email" placeholder="Your Email" class="contact-input" required>
+          <textarea name="message" rows="5" placeholder="Your Message" class="contact-input" required></textarea>
+          <button type="submit" class="btn-primary">Submit now</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="overflow-hidden whitespace-nowrap py-10 bg-black/40 border-y border-white/5 mt-10">
+      <div class="inline-flex gap-16 animate-marquee">
+        <div class="flex items-center gap-3 text-xl font-bold text-gray-500 hover:text-white transition-colors cursor-default"><i class="fa-brands fa-react text-[#fca61f] text-3xl"></i> React.js</div>
+        <div class="flex items-center gap-3 text-xl font-bold text-gray-500 hover:text-white transition-colors cursor-default"><i class="fa-brands fa-node-js text-[#fca61f] text-3xl"></i> Node.js</div>
+        <div class="flex items-center gap-3 text-xl font-bold text-gray-500 hover:text-white transition-colors cursor-default"><i class="fa-solid fa-database text-[#fca61f] text-3xl"></i> MongoDB</div>
+        <div class="flex items-center gap-3 text-xl font-bold text-gray-500 hover:text-white transition-colors cursor-default"><i class="fa-brands fa-js text-[#fca61f] text-3xl"></i> JavaScript</div>
+        <div class="flex items-center gap-3 text-xl font-bold text-gray-500 hover:text-white transition-colors cursor-default"><i class="fa-brands fa-envira text-[#fca61f] text-3xl"></i> Express.js</div>
+      </div>
+    </div>
+
+    <footer class="py-16 border-t border-white/5 text-center">
+      <div class="mb-8 flex justify-center gap-6">
+        <a href="https://zm.linkedin.com/in/jackson-nsonga-a54707390" target="_blank" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-xl hover:border-[#fca61f] hover:text-[#fca61f] hover:-translate-y-1 transition-all"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/JACKSON-THE-IT-GUY" target="_blank" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-xl hover:border-[#fca61f] hover:text-[#fca61f] hover:-translate-y-1 transition-all"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.facebook.com/j.nic.zambia" target="_blank" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-xl hover:border-[#fca61f] hover:text-[#fca61f] hover:-translate-y-1 transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="http://www.youtube.com/@JacksonNsongaDevlog" target="_blank" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-xl hover:border-[#fca61f] hover:text-[#fca61f] hover:-translate-y-1 transition-all"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+      <p class="text-gray-500 text-sm">© 2026 Jackson Nsonga. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    var typed = new Typed('#typing', { 
+      strings: ['Full-Stack Developer', 'CBU Student', 'Software Engineer'], 
+      typeSpeed: 60, backSpeed: 40, loop: true 
+    });
+
+    const sr = ScrollReveal({ reset: false });
+    sr.reveal('[data-sr-top]', { origin: 'top', distance: '40px', duration: 1000 });
+    sr.reveal('[data-sr]', { origin: 'bottom', distance: '40px', duration: 1000, interval: 200 });
+
+    function toggleAbout() {
+      const p = document.getElementById('aboutParagraph');
+      const btnText = document.querySelector('#aboutBtn span');
+      p.classList.toggle('open');
+      btnText.innerText = p.classList.contains('open') ? 'Close my story' : 'Click to read my story';
+    }
+
+    function toggleResume() {
+      const content = document.getElementById('resumeContent');
+      const btnText = document.getElementById('resumeBtnText');
+      content.classList.toggle('open');
+      btnText.innerText = content.classList.contains('open') ? 'Close Resume' : 'View my Resume';
+    }
+
+    // ARROW VISIBILITY LOGIC
+    const backToTopBtn = document.getElementById("backToTop");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTopBtn.classList.add("show");
+      } else {
+        backToTopBtn.classList.remove("show");
+      }
+    };
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  </script>
+</body>
+</html>
