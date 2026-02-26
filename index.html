@@ -27,13 +27,35 @@
       color: white;
     }
 
-    .hero-bg-left {
-      position: fixed;
-      top: 0; left: 0; width: 50%; height: 100vh;
-      background: linear-gradient(to right, rgba(11, 11, 11, 0), var(--bg-dark)), url('jac3.jpeg');
-      background-size: cover; background-position: center 20%; 
-      z-index: -1; display: none;
+    .body {
+    background-image: url('jac3.jpeg');
+    background-size: cover;
+    background-position: center; /* Keeps your chosen center point */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Specific fix for mobile devices */
+@media (max-width: 768px) {
+    body {
+        /* On mobile, 'fixed' often breaks. 'scroll' ensures it actually renders */
+        background-attachment: scroll; 
+        /* Ensures the height covers the whole mobile screen even when scrolling */
+        background-size: cover; 
     }
+    
+    /* Fix for the Top Navigation Visibility */
+    nav {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    nav .flex.space-x-8 {
+        display: flex !important;
+        gap: 15px; /* Gives them room to show up without overlapping */
+        margin-left: 0;
+    }
+}
     @media (min-width: 768px) { .hero-bg-left { display: block; } }
 
     .content-wrapper { position: relative; z-index: 10; background: transparent; }
