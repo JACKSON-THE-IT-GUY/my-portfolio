@@ -41,10 +41,37 @@
       z-index: -1;
     }
 
+    /* FLOATING ANIMATION FOR CARDS */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .glass-card {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px); 
+      transition: all 0.4s ease;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* Stagger the floating so they don't all move at the exact same time */
+    .glass-card:nth-child(even) {
+      animation-delay: 1s;
+    }
+
+    .glass-card:hover { 
+      border-color: var(--primary-color); 
+      background-color: rgba(252, 166, 31, 0.1); 
+      transform: translateY(-15px) scale(1.02);
+      animation-play-state: paused; /* Stop floating when user hovers */
+    }
+
     /* MOBILE ADJUSTMENTS */
     @media (max-width: 768px) {
       .hero-bg-left {
-        width: 45%; /* Keep the image visible on nearly half the screen */
+        width: 45%; 
       }
       nav ul {
         display: flex !important; 
@@ -53,6 +80,11 @@
       }
       nav h1 { font-size: 1rem !important; }
       header { min-height: 100vh; }
+      
+      .mobile-right-align {
+        align-items: flex-end !important;
+        text-align: right !important;
+      }
     }
 
     .content-wrapper { position: relative; z-index: 10; background: transparent; }
@@ -63,18 +95,6 @@
       transition: 0.4s; display: inline-block; color: black; border: none; cursor: pointer;
     }
     .btn-primary:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(252, 166, 31, 0.3); }
-
-    .glass-card {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background-color: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px); 
-      transition: all 0.4s ease;
-    }
-    .glass-card:hover { 
-      border-color: var(--primary-color); 
-      background-color: rgba(252, 166, 31, 0.1); 
-      transform: translateY(-10px);
-    }
 
     .contact-input {
       width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05);
@@ -138,7 +158,7 @@
 
     <header id="home" class="flex min-h-screen w-full md:flex-row flex-col">
       <div class="w-1/2 md:block hidden"></div>
-      <div class="flex-1 px-[5%] flex flex-col justify-center text-left py-20">
+      <div class="flex-1 px-[5%] flex flex-col justify-center text-left py-20 mobile-right-align">
         <img src="jac.jpg" alt="Jackson Nsonga" class="w-[150px] h-[150px] rounded-full border-4 border-white shadow-[0_0_30px_rgba(252,166,31,0.4)] object-cover mb-8" data-sr-top>
         <h3 class="text-xl md:text-2xl mb-4 font-light" data-sr>Hi! I'm Jackson Nsonga</h3>
         <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight" data-sr>
